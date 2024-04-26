@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.emanagement.management.Model.Employee;
 import com.emanagement.management.Repository.EmployeeRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @CrossOrigin
 @RestController
@@ -23,4 +26,8 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
+    @PostMapping("/employees")
+    public Employee createEmployee(@RequestBody Employee employee){
+        return employeeRepository.save(employee);
+    }
 }

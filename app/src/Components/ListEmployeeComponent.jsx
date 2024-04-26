@@ -1,16 +1,20 @@
 import EmployeeService from "../Services/EmployeeService";
 import React from 'react';
-import "../Bootstrap/bootstrap.css"
+import "../Bootstrap/bootstrap.css";
+import { Link } from 'react-router-dom';
 
 const { Component } = require("react");
 
 class ListEmployeeComponent extends Component{
+
     constructor(props){
         super(props)
 
         this.state = {
             employees: []
         }
+
+        this.addEmployee = this.addEmployee.bind(this);
     }
 
     componentDidMount(){
@@ -19,9 +23,13 @@ class ListEmployeeComponent extends Component{
         })
     }
 
+    addEmployee(){
+        this.props.history.push("/add-employee");
+    }
+
     render(){
         return (
-            <div >
+            <div>
                 <h2 className="text-center m-4">Emloyees List</h2>
                 <div className="row">
                     <table className="table table-striped table-bordered">
@@ -45,6 +53,9 @@ class ListEmployeeComponent extends Component{
                             }
                         </tbody>
                     </table>
+                </div>
+                <div className="d-flex justify-content-end my-3">
+                    <Link to='/add-employee' className='btn btn-success'>Add Employee</Link>
                 </div>
             </div>
         );

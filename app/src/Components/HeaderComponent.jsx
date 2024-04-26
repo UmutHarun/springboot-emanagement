@@ -17,7 +17,7 @@ class HeaderComponent extends Component{
             <div>
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark p-3">
-                        <div><a href="http://localhost:8090/api/v1/employees" className="navbar-brand">Employee Management</a></div>
+                        <div><a href="/employees" className="navbar-brand">Employee Management</a></div>
                     </nav>
                 </header>
             </div>
