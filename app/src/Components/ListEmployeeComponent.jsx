@@ -1,7 +1,7 @@
 import EmployeeService from "../Services/EmployeeService";
 import React from 'react';
 import "../Bootstrap/bootstrap.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const { Component } = require("react");
 
@@ -15,11 +15,18 @@ class ListEmployeeComponent extends Component{
         }
 
         this.addEmployee = this.addEmployee.bind(this);
+        this.updateEmployee = this.updateEmployee.bind(this);
+    }
+
+    navigator = useNavigate();
+
+    updateEmployee(id){
+        navigator(`/edit-employee/${id}`);
     }
 
     componentDidMount(){
         EmployeeService.getEmployees().then((res) => {
-            this.setState({employees: res.data})
+            this.setState({employees: res.data});
         })
     }
 
@@ -48,6 +55,10 @@ class ListEmployeeComponent extends Component{
                                         <td>{emp.firstName}</td>
                                         <td>{emp.lastName}</td>
                                         <td>{emp.emailId}</td>
+                                        <td>
+                                            {/* <Link to="/update-employee/{id}" className="btn btn-info">Update</Link> */}
+                                            <button className="btn btn-info" onClick={() => this.updateEmployee(emp.id)}>Update</button>
+                                        </td>
                                     </tr>
                                 ))
                             }
