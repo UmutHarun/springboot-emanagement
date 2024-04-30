@@ -3,7 +3,7 @@ import './App.css';
 import ListEmployeeComponent from './Components/ListEmployeeComponent';
 import HeaderComponent from './Components/HeaderComponent';
 import FooterComponent from './Components/FooterComponent';
-import {BrowserRouter as Router, Route , Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route , Routes, BrowserRouter} from "react-router-dom";
 import CreateEmployeeComponent from './Components/CreateEmployeeComponent';
 import UpdateEmployeeComponent from './Components/UpdateEmployeeComponent';
 
