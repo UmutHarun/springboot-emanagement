@@ -1,10 +1,11 @@
 import "../Bootstrap/bootstrap.css";
 import React, { useState , useEffect} from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link ,useNavigate  } from 'react-router-dom';
 import EmployeeService from "../Services/EmployeeService";
 
 function DeleteEmployeeComponent() {
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [employee, setEmployee] = useState({
         id: '',
@@ -29,7 +30,9 @@ function DeleteEmployeeComponent() {
         e.preventDefault();
         // let employee = {firstName: this.state.firstName , lastName: this.state.lastName , emailId: this.state.emailId}
         // console.log(JSON.stringify(employee));
-        EmployeeService.deleteEmployee(id);
+        EmployeeService.deleteEmployee(id).then(() => {
+            navigate("/employees");
+        });
     }
 
     return (
@@ -55,7 +58,7 @@ function DeleteEmployeeComponent() {
                                 value={employee.emailId} disabled />
                             </div>
                             <div className="py-3">
-                                <button className="btn btn-danger mx-1" onClick={removeEmployee}><Link style={{color:"white",textDecoration:"none"}} to='/employees'>Delete</Link></button>
+                                <button className="btn btn-danger mx-1" onClick={removeEmployee}>Delete</button>
                                 {/* <Link to='/employees' className='btn btn-danger mx-1' onClick={this.saveEmployee}>Save</Link> */}
                                 <Link to='/employees' className='btn btn-primary mx-1'>Cancel</Link>
                             </div>
