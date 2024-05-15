@@ -10,19 +10,21 @@ export default function LoginComponent() {
         role: "USER"
     });
 
-    const navigate = useNavigate();
-
-    const handleUserInputChange = (e) => {
-        const { name, value } = e.target;
-        setUserDetails((prevState) => ({...prevState , [name]: value}));
-    };
+    function changeFormHandler(event){
+        const {name,value} = event.target;
+        setUserDetails(prevstate => ({
+            ...prevstate,
+            [name] : value
+        }))
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        EmployeeService.loginUser(userDetails).then(res => {
-            navigate('/employees');
-        });
+        EmployeeService.loginUser(userDetails)
+        // .then(res => {
+        //     navigate('/employees');
+        // });
     };
     
     return (
@@ -33,19 +35,22 @@ export default function LoginComponent() {
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input
-                        type="text"
-                        id="username"
-                        onChange={handleUserInputChange}
-                        required
+                            placeholder="Username" 
+                            type='text'
+                            name="username" 
+                            className="form-control" 
+                            value={userDetails.username}
+                            onChange={changeFormHandler}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
                         <input
-                        type="password"
-                        id="password"
-                        onChange={handleUserInputChange}
-                        required
+                            className="form-control" 
+                            placeholder="Password" 
+                            type="password"
+                            id="password"
+                            onChange={changeFormHandler}
                         />
                     </div>
                     <button type="submit">Login</button>

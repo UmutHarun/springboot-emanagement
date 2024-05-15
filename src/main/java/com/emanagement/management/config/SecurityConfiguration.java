@@ -13,10 +13,12 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.emanagement.management.Service.MyUserDetailsService;
 
 
 @Configuration
+@CrossOrigin(origins = "http://localhost:3000")
 @EnableWebSecurity
 public class SecurityConfiguration {
 
@@ -31,7 +33,8 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(registry -> {
             registry.requestMatchers("/login/user").permitAll();
             registry.requestMatchers("/register/user").permitAll();
-            registry.requestMatchers("/api/employees").hasRole("USER");
+            registry.requestMatchers("/api/employees").permitAll();
+            // registry.requestMatchers("/api/employees").hasRole("USER");
             registry.requestMatchers("/api/index").hasRole("USER");
             registry.anyRequest().authenticated();
         })

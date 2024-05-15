@@ -8,6 +8,8 @@ import com.emanagement.management.Repository.MyUserRepository;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,19 +34,18 @@ public class RegistrationController {
     }
     
     @PostMapping("/login/user")
-    public ResponseEntity<String> loginUser(@RequestBody MyUser user) {
+    public ResponseEntity<?> loginUser(@RequestBody MyUser user) {
         Optional<MyUser> loggedUser = myUserRepository.findByUsername(user.getUsername());
 
         if(loggedUser.isEmpty()){
-            return ResponseEntity.ok("Failed"); 
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User is not found");
         }
     
         MyUser foundUser = loggedUser.get();
         if(passwordEncoder.matches(user.getPassword(), foundUser.getPassword())){
-
-            return ResponseEntity.ok("Success");
+            return ResponseEntity.status(HttpStatus.OK).body("success");
         }
     
-        return ResponseEntity.ok("Failed"); 
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("User is not found");
     }
 }

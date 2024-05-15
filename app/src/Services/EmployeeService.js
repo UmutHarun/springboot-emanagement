@@ -25,7 +25,11 @@ class EmployeeService{
     }
 
     loginUser(userDetails){
-        return axios.post(API_BASE_URL + "/login/user" , userDetails)
+        try {
+            return axios.post(API_BASE_URL + "/login/user" , userDetails)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     registerUser(userDetails){
