@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Route , Routes} from "react-router-dom";
 import CreateEmployeeComponent from './Components/CreateEmployeeComponent';
 import UpdateEmployeeComponent from './Components/UpdateEmployeeComponent';
 import DeleteEmployeeComponent from './Components/DeleteEmployeeComponent';
+import LoginComponent from './Components/LoginComponent';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path = "/add-employee" element={<CreateEmployeeComponent />}></Route>
                 <Route path='/edit-employee/:id' element={<UpdateEmployeeComponent />}></Route>
                 <Route path='/delete-employee/:id' element={<DeleteEmployeeComponent />}></Route>
+                <Route path='/login-user' element={<LoginComponent />}></Route>
               </Routes>
             </div>
           <FooterComponent />

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-
-const EMPLOYEE_API_BASE_URL = "http://localhost:8090/api/v1/employees";
+const API_BASE_URL = "http://localhost:8090";
+const EMPLOYEE_API_BASE_URL = API_BASE_URL + "/api/employees";
 
 class EmployeeService{
     getEmployees(){
@@ -22,6 +22,14 @@ class EmployeeService{
 
     deleteEmployee(id){
         return axios.delete(EMPLOYEE_API_BASE_URL + "/" + id);
+    }
+
+    loginUser(userDetails){
+        return axios.post(API_BASE_URL + "/login/user" , userDetails)
+    }
+
+    registerUser(userDetails){
+        return axios.post(API_BASE_URL + "/register/user" , userDetails)
     }
 }
 
